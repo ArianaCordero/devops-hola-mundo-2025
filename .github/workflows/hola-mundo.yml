@@ -2,6 +2,12 @@ name: Hola Mundo DevOps 2025
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch a ejecutar'
+        required: true
+        default: 'main'
+        type: string
 
 jobs:
   saludar:
@@ -10,6 +16,8 @@ jobs:
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
       
       - name: Configurar Python
         uses: actions/setup-python@v4
